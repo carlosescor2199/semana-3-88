@@ -54,11 +54,11 @@ app.post('/api/auth/signup', async (req, res) => {
 });
 
 app.post('/api/auth/signin', async (req, res) => {
-    const { name, password } = req.body
-    if(name.trim() === '' || password.trim()  === '') {
+    const { email, password } = req.body
+    if(email.trim() === '' || password.trim()  === '') {
         return res.status(401).send('Los Datos no pueden estar vacios')
     }
-    const user = await db.User.findOne({where: {name: name}})
+    const user = await db.User.findOne({where: {email: email}})
     if(user === null) {
         return res.status(404).send('User Not Found.');
     }
